@@ -1,5 +1,7 @@
 // Licensed under MIT or Apache-2.0, from https://github.com/rust-lang/rust/blob/master/tests/ui/coroutine/async_gen_fn_iter.rs
 
+// https://github.com/rust-lang/rust/issues/106765
+
 // edition: 2024
 // compile-flags: -Zunstable-options
 // run-pass
@@ -8,16 +10,29 @@
 
 // make sure that a ridiculously simple async gen fn works as an iterator.
 
+#[inline(always)]
 async fn pause() {
     // this doesn't actually do anything, lol
 }
 
+#[inline(always)]
 async fn one() -> i32 {
     1
 }
 
+#[inline(always)]
 async fn two() -> i32 {
     2
+}
+
+struct Inline;
+
+impl Future for Inline {
+    type Output = i32;
+
+    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
+        Poll::Ready(42i32)
+    }
 }
 
 async gen fn foo() -> i32 {
@@ -27,6 +42,14 @@ async gen fn foo() -> i32 {
     pause().await;
     yield 3;
     pause().await;
+    yield Inline.await;
+    yield Inline.await;
+    yield Inline.await;
+    yield Inline.await;
+    yield Inline.await;
+    yield Inline.await;
+    yield Inline.await;
+
 }
 
 async fn async_main() {
