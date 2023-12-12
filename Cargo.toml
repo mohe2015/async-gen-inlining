@@ -5,6 +5,17 @@ name = "async-gen-inlining"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+crate-type = ["dylib"]
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+[profile.release]
+#opt-level = 3
+opt-level = "s"
+codegen-units = 1
+lto = true
+panic = "abort"
+strip = true  # Automatically strip symbols from the binary.

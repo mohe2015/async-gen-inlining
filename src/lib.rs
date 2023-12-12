@@ -5,12 +5,17 @@
 // edition: 2024
 // compile-flags: -Zunstable-options
 // run-pass
-
+#![no_std]
 #![feature(gen_blocks, async_iterator)]
 
-use std::{future::Future, pin::Pin, task::{Context, Poll}};
+use core::{future::Future, pin::Pin, task::{Context, Poll}};
+use core::panic::PanicInfo;
 
-// make sure that a ridiculously simple async gen fn works as an iterator.
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
 struct Inline;
 
 impl Future for Inline {
@@ -22,7 +27,7 @@ impl Future for Inline {
     }
 }
 
-async gen fn foo() -> i32 {
+pub async gen fn foo() -> i32 {
     yield Inline.await;
     yield Inline.await;
     yield Inline.await;
@@ -34,7 +39,7 @@ async gen fn foo() -> i32 {
     yield Inline.await;
 }
 
-async gen fn foo2() -> i32 {
+pub async gen fn foo2() -> i32 {
     yield 42i32;
     yield 42i32;
     yield 42i32;
