@@ -1,6 +1,7 @@
 [build]
 target = "x86_64-unknown-linux-gnu"
 rustflags = [
+    "-Cpanic=abort",
     "-Zlocation-detail=none",
     "-Zprint-type-sizes"
 ]

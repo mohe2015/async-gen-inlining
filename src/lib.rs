@@ -7,6 +7,7 @@
 // run-pass
 #![no_std]
 #![feature(gen_blocks, async_iterator)]
+#![no_main]
 
 use core::{future::Future, pin::Pin, task::{Context, Poll}};
 use core::panic::PanicInfo;
