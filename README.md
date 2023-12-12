@@ -7,4 +7,5 @@ cargo build | tee type-sizes.txt
 
 cargo build --release | tee type-sizes.txt
 
+cargo build --release && ls -lh target/x86_64-unknown-linux-gnu/release/
 ```

@@ -6,8 +6,8 @@
 // compile-flags: -Zunstable-options
 // run-pass
 #![no_std]
-#![feature(gen_blocks, async_iterator)]
 #![no_main]
+#![feature(gen_blocks, async_iterator)]
 
 use core::{future::Future, pin::Pin, task::{Context, Poll}};
 use core::panic::PanicInfo;
@@ -16,7 +16,7 @@ use core::panic::PanicInfo;
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
-
+/*
 struct Inline;
 
 impl Future for Inline {
@@ -51,3 +51,4 @@ pub async gen fn foo2() -> i32 {
     yield 42i32;
     yield 42i32;
 }
+*/
