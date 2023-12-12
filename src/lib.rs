@@ -2,14 +2,10 @@
 
 // https://github.com/rust-lang/rust/issues/106765
 
-// edition: 2024
-// compile-flags: -Zunstable-options
-// run-pass
 #![no_std]
 #![no_main]
-#![feature(gen_blocks, async_iterator)]
+//#![feature(gen_blocks, async_iterator)]
 
-use core::{future::Future, pin::Pin, task::{Context, Poll}};
 use core::panic::PanicInfo;
 
 #[panic_handler]

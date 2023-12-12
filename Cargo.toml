@@ -14,8 +14,9 @@ crate-type = ["dylib"]
 
 [profile.release]
 #opt-level = 3
-opt-level = "s"
+opt-level = "z"
 codegen-units = 1
 lto = true
 panic = "abort"
-strip = true  # Automatically strip symbols from the binary.
+strip = false
+debug = true
