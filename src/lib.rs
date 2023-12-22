@@ -1,50 +1,5 @@
-// Licensed under MIT or Apache-2.0, from https://github.com/rust-lang/rust/blob/master/tests/ui/coroutine/async_gen_fn_iter.rs
+#![feature(gen_blocks, async_iterator)]
 
-// https://github.com/rust-lang/rust/issues/106765
-
-#![no_std]
-#![no_main]
-//#![feature(gen_blocks, async_iterator)]
-
-use core::panic::PanicInfo;
-
-#[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
+pub gen fn test() -> &'static str {
+    yield "Hi";
 }
-/*
-struct Inline;
-
-impl Future for Inline {
-    type Output = i32;
-
-    #[inline(always)]
-    fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
-        Poll::Ready(42i32)
-    }
-}
-
-pub async gen fn foo() -> i32 {
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-    yield Inline.await;
-}
-
-pub async gen fn foo2() -> i32 {
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-    yield 42i32;
-}
-*/
