@@ -10,7 +10,7 @@ pub fn test() {
         yield 1;
     };
     match Pin::new(&mut coroutine).resume(()) {
-        CoroutineState::Yielded(test) => {take_i64(test)}
+        CoroutineState::Yielded(test) => {}
         _ => panic!("unexpected value from resume"),
     }
 }
