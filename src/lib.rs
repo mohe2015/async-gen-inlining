@@ -2,6 +2,7 @@
 
 pub mod test;
 pub mod test2;
+pub mod test3;
 
 use std::async_iter::AsyncIterator;
 use std::pin::pin;
