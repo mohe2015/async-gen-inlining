@@ -1,4 +1,4 @@
-use std::{pin::Pin, ops::CoroutineState};
+use std::pin::Pin;
 use std::ops::Coroutine;
 
 pub fn take_i64(_input: i64) {
@@ -7,10 +7,7 @@ pub fn take_i64(_input: i64) {
 
 pub fn test() {
     let mut coroutine = || {
-        yield 1;
+        yield 1i32;
     };
-    match Pin::new(&mut coroutine).resume(()) {
-        CoroutineState::Yielded(test) => {}
-        _ => panic!("unexpected value from resume"),
-    }
+    let _result = Pin::new(&mut coroutine).resume(());
 }
