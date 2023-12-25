@@ -8,9 +8,9 @@ fn test(mut context: Context) {
         let a = yield 1;
         let a = yield 2;
     };
-
-    match g.poll_next(&mut context) {
-        Poll::Ready(y) => { f(y); } // FIXME test with 1 there I think this infers stuff it should not
-        Poll::Pending => {}
+    let mut pinned = std::pin::pin!(g);
+    match pinned.as_mut().poll_next(&mut context) {
+        Poll::Ready(Some(y)) => { f(y); } // FIXME test with 1 there I think this infers stuff it should not
+        _ => {}
     }
 }

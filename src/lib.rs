@@ -1,6 +1,7 @@
 #![feature(gen_blocks, async_iterator, coroutines, coroutine_trait, noop_waker)]
 
 pub mod test;
+pub mod test2;
 
 use std::async_iter::AsyncIterator;
 use std::pin::pin;
@@ -8,7 +9,7 @@ use std::task::{Context, Waker, Poll};
 use std::{pin::Pin, ops::CoroutineState};
 use std::ops::Coroutine;
 
-pub fn take_iterator(_iterator: impl Iterator<Item = i32>) {
+pub fn take_iterator(_iterator: impl Iterator<Item = i64>) {
 
 }
 
